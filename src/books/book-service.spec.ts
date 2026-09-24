@@ -25,6 +25,22 @@ describe('BookService', () => {
   });
 
   // Test : L'ajout d'un livre sans titre ne doit pas fonctionner
+  it('shouldn\'t add a titleless book', () => {
+    const book: Book = {
+      id: 10,
+      author: 'Author',
+      title: "",
+      availableCopies: 1,
+      totalCopies: 1,
+    }
+
+    const result = service.addBook(book);
+
+    expect(result).not.toBe(true);
+    expect(result).toBe(false);
+
+  });
+
 
   // Test : L'ajout d'un livre ayant totalCopies à 0 ou négatif ne doit pas fonctionner
 

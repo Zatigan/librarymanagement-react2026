@@ -31,6 +31,9 @@ export class BookService {
 
   addBook(book: Book): boolean {
     if (book) {
+      if(book.title === "") {
+        return false;
+      }
       this.books.push(book);
       return true;
     }
