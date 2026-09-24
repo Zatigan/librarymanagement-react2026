@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import type { Book } from './book';
 import { BookService } from './book-service';
 
+
 describe('BookService', () => {
   let service: BookService;
 
@@ -42,7 +43,7 @@ describe('BookService', () => {
 
   // Test : L'ajout d'un livre ayant totalCopies à 0 ou négatif ne doit pas fonctionner
   it('can\'t have totalCopies equals or lower to 0', () => {
-        const book: Book = {
+    const book: Book = {
       id: 10,
       title: 'Test Book',
       author: 'Author',
@@ -56,6 +57,28 @@ describe('BookService', () => {
   });
 
   // Test : Emprunter un livre doit décrémenter availableCopies
+  it('should decrease availableCopies value', () => {
+    // Création d'un livre pour réaliser le test
+    const book: Book = {
+      id: 10,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 5,
+      totalCopies: 10,
+    };
+
+    service.addBook(book);
+
+    const books = service.getBooks();
+    const initialAvailableCopies = books[3].availableCopies;
+    // J'emprunte le 1er livre
+    service.borrowBook(10);
+
+    const updatedAvailableCopies = books[3].availableCopies;
+
+    expect(initialAvailableCopies - updatedAvailableCopies).toEqual(1);
+    expect(updatedAvailableCopies).toBe(4);
+  })
 
   // Test : Ne pas emprunter un livre dont availableCopies est égal à 0
 
