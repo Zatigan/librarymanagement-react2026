@@ -55,6 +55,9 @@ export class BookService {
   returnBook(id: number): boolean {
     const book = this.books.find((book) => book.id === id);
     if (book) {
+      if(book.availableCopies === book.totalCopies) {
+        return false;
+      }
       book.availableCopies++;
       return true;
     }

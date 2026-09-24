@@ -129,6 +129,21 @@ describe('BookService', () => {
   })
 
   // Test : Ne pas retourner un livre dont toutes les copies ont déjà été rendues
+  it('shouldn\'t allow to return a book not borrowed', () => {
+    const book: Book = {
+      id: 10,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 3,
+      totalCopies: 3,
+    };
+
+    service.addBook(book);
+
+    const result = service.returnBook(10);
+
+    expect(result).toBe(false);
+  })
 
   // Ajoute des tests de ton choix pour les autres méthodes
 });
