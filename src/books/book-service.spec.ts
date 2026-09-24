@@ -81,7 +81,22 @@ describe('BookService', () => {
   })
 
   // Test : Ne pas emprunter un livre dont availableCopies est égal à 0
+  it('shouldn`t a book being borrowoed when availableCopies is 0', () => {
+    // Création d'un livre pour réaliser le test
+    const book: Book = {
+      id: 10,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 0,
+      totalCopies: 10,
+    };
 
+    service.addBook(book);
+
+    const result = service.borrowBook(10);
+
+    expect(result).toBe(false);
+  })
   // Test : Ne pas emprunter un livre qui n'existe pas
 
   // Test : Retourner un livre doit incrémenter availableCopies

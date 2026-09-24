@@ -43,6 +43,9 @@ export class BookService {
   borrowBook(id: number): boolean {
     const book = this.books.find((book) => book.id === id);
     if (book) {
+      if (book.availableCopies === 0) {
+        return false;
+      }
       book.availableCopies--;
       return true;
     }
