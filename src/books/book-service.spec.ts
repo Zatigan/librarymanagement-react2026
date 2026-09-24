@@ -156,14 +156,18 @@ describe('BookService', () => {
     };
 
     service.addBook(book);
-
     const beforeDeletion = service.getBooks().length;
 
     service.deleteBook(10);
-
     const afterDeletion = service.getBooks().length;
 
     expect(afterDeletion).toEqual(beforeDeletion - 1);
   });
 
+  // Test : Ne pas supprimer un livre qui n'existe pas
+  it('shouldn\'t delete a non existing book', () => {
+    const result = service.deleteBook(100);
+
+    expect(result).toBe(false);
+  })
 });

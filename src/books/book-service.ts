@@ -66,8 +66,12 @@ export class BookService {
 
   deleteBook(id: number): boolean {
     if (id) {
-      this.books = this.books.filter((book) => book.id !== id);
-      return true;
+      const book = this.books.find((book) => book.id === id);
+      if (book) {
+        this.books = this.books.filter((book) => book.id !== id);
+        return true;
+      }
+      return false;
     }
     return false;
   }
