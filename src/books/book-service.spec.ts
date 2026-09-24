@@ -105,9 +105,24 @@ describe('BookService', () => {
   })
 
   // Test : Retourner un livre doit incrémenter availableCopies
+  it('should increase availableCopies value', () => {
+    const book: Book = {
+      id: 10,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 0,
+      totalCopies: 3,
+    };
+
+    service.addBook(book);
+
+    service.returnBook(10);
+
+    expect(book.availableCopies).toBe(1);
+  });
 
   // Test : Ne pas retourner un livre qui n'existe pas
-
+  
   // Test : Ne pas retourner un livre dont toutes les copies ont déjà été rendues
 
   // Ajoute des tests de ton choix pour les autres méthodes
