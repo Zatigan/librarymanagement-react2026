@@ -145,5 +145,25 @@ describe('BookService', () => {
     expect(result).toBe(false);
   })
 
-  // Ajoute des tests de ton choix pour les autres méthodes
+  // Test : Un livre est bien supprimé de la base
+  it('should delete a book', () => {
+    const book: Book = {
+      id: 10,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 3,
+      totalCopies: 3,
+    };
+
+    service.addBook(book);
+
+    const beforeDeletion = service.getBooks().length;
+
+    service.deleteBook(10);
+
+    const afterDeletion = service.getBooks().length;
+
+    expect(afterDeletion).toEqual(beforeDeletion - 1);
+  });
+
 });
