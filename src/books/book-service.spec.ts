@@ -28,8 +28,8 @@ describe('BookService', () => {
   it('shouldn\'t add a titleless book', () => {
     const book: Book = {
       id: 10,
+      title: '',
       author: 'Author',
-      title: "",
       availableCopies: 1,
       totalCopies: 1,
     }
@@ -37,12 +37,23 @@ describe('BookService', () => {
     const result = service.addBook(book);
 
     expect(result).not.toBe(true);
-    expect(result).toBe(false);
-
   });
 
 
   // Test : L'ajout d'un livre ayant totalCopies à 0 ou négatif ne doit pas fonctionner
+  it('can\'t have totalCopies equals or lower to 0', () => {
+        const book: Book = {
+      id: 10,
+      title: 'Test Book',
+      author: 'Author',
+      availableCopies: 1,
+      totalCopies: -2,
+    }
+
+    const result = service.addBook(book);
+
+    expect(result).toBe(false);
+  });
 
   // Test : Emprunter un livre doit décrémenter availableCopies
 

@@ -31,7 +31,7 @@ export class BookService {
 
   addBook(book: Book): boolean {
     if (book) {
-      if(book.title === "") {
+      if(book.title === "" || book.totalCopies < 1) {
         return false;
       }
       this.books.push(book);
