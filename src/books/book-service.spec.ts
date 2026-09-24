@@ -42,7 +42,7 @@ describe('BookService', () => {
 
 
   // Test : L'ajout d'un livre ayant totalCopies à 0 ou négatif ne doit pas fonctionner
-  it('can\'t have totalCopies equals or lower to 0', () => {
+  it('can\'t have totalCopies equals or lower to 0 on book creation', () => {
     const book: Book = {
       id: 10,
       title: 'Test Book',
@@ -81,8 +81,7 @@ describe('BookService', () => {
   })
 
   // Test : Ne pas emprunter un livre dont availableCopies est égal à 0
-  it('shouldn`t a book being borrowoed when availableCopies is 0', () => {
-    // Création d'un livre pour réaliser le test
+  it('shouldn\'t allow a book to be borrowed when availableCopies is 0', () => {
     const book: Book = {
       id: 10,
       title: 'Test Book',
@@ -97,7 +96,13 @@ describe('BookService', () => {
 
     expect(result).toBe(false);
   })
+
   // Test : Ne pas emprunter un livre qui n'existe pas
+  it('shouldn\'t allow to borrow a book that does not exist', () => {
+    const result = service.borrowBook(10);
+
+    expect(result).toBe(false);
+  })
 
   // Test : Retourner un livre doit incrémenter availableCopies
 
